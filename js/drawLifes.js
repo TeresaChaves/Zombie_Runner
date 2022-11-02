@@ -3,6 +3,7 @@ class DrawLife {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
+
         this.image = new Image();
         this.image.src = "../img/player.png";
         // this.image.frames = 3;
@@ -15,7 +16,7 @@ class DrawLife {
         this.posDrawLifeY = this.canvasSize.h - this.heightDrawLife - 40
         this.posFloor = this.canvasSize.h - 50
         // this.velDrawLife = {
-        //     x: 8,
+        //     x: 1,
         //     y: 4
         // }
         // this.gravity = 0.4
@@ -35,24 +36,19 @@ class DrawLife {
             this.widthDrawLife,
             this.heightDrawLife
 
-
         )
         console.log(this.ctx.drawImage)
-
-
-
-
     }
 
 
 
 
 
-    jump() {
+    // jump() {
 
-        this.posDrawLifeY -= 5
-        this.velDrawLife.y = -15
-    }
+    //     this.posDrawLifeY -= 5
+    //     this.velDrawLife.y = -15
+    // }
 
 
 }

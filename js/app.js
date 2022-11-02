@@ -187,6 +187,8 @@ const App = {
 
 
         return this.humans.forEach((hum, i) => {
+
+
             if (
 
                 this.player.posPlayerX + this.player.widthPlayer >= hum.posHumanX &&
@@ -196,14 +198,16 @@ const App = {
             ) {
                 this.humans.splice(hum[i], 1)
                 this.life++
+
+
+                this.convertedHuman.push(new DrawLife(this.ctx, this.canvasSize, this.posDrawLifeX, this.posDrawLifeY))
+                //console.log(this.drawsLife)
                 // if (this.convertedHuman.length === 1) {
-                //     this.posDrawLifeX = +10
+                //     this.posDrawLifeX += 80
+
                 // }
                 // if (this.convertedHuman.length === 2) {
-                //     this.posDrawLifeX = +10
-
-                this.convertedHuman.push(new DrawLife(this.ctx, this.canvasSize))
-                //console.log(this.drawsLife)
+                //     this.posDrawLifeX += 190
 
 
 
@@ -228,7 +232,7 @@ const App = {
         this.clear()
         clearInterval(this.interval)
         // console.log("this.gameOver()")
-        document.querySelector('#gameOver').style.display = "block"
+        document.querySelector('#').style.display = "block"
 
 
     },

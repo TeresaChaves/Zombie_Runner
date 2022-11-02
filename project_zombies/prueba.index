@@ -1,0 +1,7 @@
+ <canvas id="myCanvas"></canvas>
+    <script src="obstacle.js"></script>
+    <script src="humans.js"></script>
+    <script src="players.js"></script>
+    <script src="background.js"></script>
+    <script src="app.js"></script>
+    <script src="index.js"></script>

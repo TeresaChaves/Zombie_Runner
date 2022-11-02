@@ -15,6 +15,7 @@ const App = {
     humans: [],
     life: 3,
     score: 0,
+    convertedHuman: [],
     background: undefined,
     FPS: 60,
     framesCounter: 0,
@@ -22,16 +23,18 @@ const App = {
         this.setDimensions()
         this.setContext()
         this.createPlayer()
+        //this.createLife()
         this.createBackground()
 
         this.generateObstacles()
         this.clearObstacles()
         this.generateHumans()
 
+
         this.player.setEventHandlers()
         this.player.jump()
 
-        //////////////////////////////////55/////55//
+
 
 
         this.start()
@@ -91,6 +94,10 @@ const App = {
         this.background = new Background(this.ctx, this.canvasSize)
     },
 
+    // createLife() {
+    //     this.drawsLife = new DrawLife(this.ctx, this.canvasSize)
+    // },
+
     generateObstacles() {
         this.obstacles.push(new Obstacle(this.ctx, this.canvasSize))
         //console.log(this.canvasSize)
@@ -101,6 +108,7 @@ const App = {
     generateHumans() {
         this.humans.push(new Humans(this.ctx, this.canvasSize))
     },
+
 
 
 
@@ -122,10 +130,13 @@ const App = {
         this.background.draw()
         this.scoreGen()
         this.player.drawPlayer()
+        this.convertedHuman.forEach(life => life.drawDrawLife())
+
         this.obstacles.forEach((obstacle => obstacle.drawObstacle())),
             this.obstacles.forEach((obstacle => obstacle.moveObstacle()))
         this.humans.forEach((humans => humans.drawHuman())),
             this.humans.forEach((humans => humans.moveHuman()))
+
 
     },
 
@@ -185,6 +196,16 @@ const App = {
             ) {
                 this.humans.splice(hum[i], 1)
                 this.life++
+                // if (this.convertedHuman.length === 1) {
+                //     this.posDrawLifeX = +10
+                // }
+                // if (this.convertedHuman.length === 2) {
+                //     this.posDrawLifeX = +10
+
+                this.convertedHuman.push(new DrawLife(this.ctx, this.canvasSize))
+                //console.log(this.drawsLife)
+
+
 
                 console.log(this.life)
             }
@@ -202,10 +223,13 @@ const App = {
 
     },
 
-    gameOver() {
 
+    gameOver() {
+        this.clear()
         clearInterval(this.interval)
         // console.log("this.gameOver()")
+        document.querySelector('#gameOver').style.display = "block"
+
 
     },
 }

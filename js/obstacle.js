@@ -3,11 +3,11 @@ class Obstacle {
 
         this.ctx = ctx
         this.canvasSize = canvasSize
-        this.widthObstacle = 80
-        this.heigthObstacle = 100
+        this.widthObstacle = 150
+        this.heigthObstacle = 75
         this.obstFloor = this.canvasSize.h - this.heigthObstacle - 80
         this.posObstacleX = this.canvasSize.w - 50
-        this.posObstacleY = 560
+        this.posObstacleY = this.canvasSize.h - this.heigthObstacle - 70
 
 
 
@@ -17,12 +17,21 @@ class Obstacle {
 
         }
 
+        this.image = new Image();
+        this.image.src = "../img/bomba.png";
+
+
+
+
+
 
     }
 
     drawObstacle() {
-        this.ctx.fillStyle = "red"
-        this.ctx.fillRect(this.posObstacleX, this.posObstacleY, this.widthObstacle, this.heigthObstacle)
+
+        this.ctx.drawImage(this.image, this.posObstacleX, this.posObstacleY, this.widthObstacle, this.heigthObstacle)
+        // this.ctx.fillStyle = "red"
+        // this.ctx.fillRect(this.posObstacleX, this.posObstacleY, this.widthObstacle, this.heigthObstacle)
 
 
         this.moveObstacle()

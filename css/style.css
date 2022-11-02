@@ -1,18 +1,68 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: black;
+    overflow: hidden;
+}
+
+
+
+.container {
+    width: 300px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    width: 50px;
+}
+
+div.game-intro {
+    width: 100%;
+    background-color: tomato
+}
+
+button {
+    align-items: center;
+    display: none;
+
+
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+
+}
+
+#gameOver {
+    display: none;
+    background: black;
+}
+
+#gameOver img {
+    object-fit: contain;
 }
 
 body button {
-    font-size: 30px;
+    font-size: 60px;
     background-color: #870007;
     color: #fff;
-    padding: 20px 40px;
+    padding: 20px 100px;
     border: 0;
     box-shadow: 0;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    border-radius: 20px;
+    margin-bottom: 80px;
     position: absolute;
+    text-align: center;
+
+}
+
+button.container {
+    width: 200px;
+    margin-left: 200%;
+    transform: translate(50%);
 }
 
 body {

@@ -3,11 +3,11 @@ class Humans {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.widthHuman = 150
-        this.heigthHuman = 100
+        this.widthHuman = 80
+        this.heigthHuman = 190
         this.posHumanX = this.canvasSize.w + this.heigthHuman
         this.humanFloor = this.canvasSize.h - this.heigthHuman - 200
-        this.posHumanY = this.humanFloor + this.heigthHuman
+        this.posHumanY = this.humanFloor + this.heigthHuman - 50
 
         this.velHuman = {
             x: Math.random() * 12,
@@ -15,11 +15,14 @@ class Humans {
 
         }
 
+        this.image = new Image();
+        this.image.src = "../img/human.png";
 
     }
     drawHuman() {
-        this.ctx.fillStyle = "grey"
-        this.ctx.fillRect(this.posHumanX, this.posHumanY, this.widthHuman, this.heigthHuman)
+        this.ctx.drawImage(this.image, this.posHumanX, this.posHumanY, this.widthHuman, this.heigthHuman)
+        // this.ctx.fillStyle = "grey"
+        // this.ctx.fillRect(this.posHumanX, this.posHumanY, this.widthHuman, this.heigthHuman)
         this.moveHuman()
     }
     moveHuman() {

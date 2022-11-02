@@ -3,9 +3,15 @@ class Players {
         this.ctx = ctx
         this.canvasSize = canvasSize
 
-        this.widthPlayer = 100
-        this.heightPlayer = 100
-        this.posPlayerX = 
+        this.image = new Image();
+        this.image.src = "../img/player.png";
+        this.image.frames = 3;
+        this.image.framesIndex = 0;
+        console.log(this.image)
+
+        this.widthPlayer = 250
+        this.heightPlayer = 200
+        this.posPlayerX = 50
         this.posPlayerY = this.canvasSize.h - this.heightPlayer - 40
         this.posFloor = this.canvasSize.h - 50
         this.velPlayer = {
@@ -19,14 +25,30 @@ class Players {
     }
 
     drawPlayer() {
-        this.ctx.fillStyle = 'green'
-        this.ctx.fillRect(this.posPlayerX, this.posPlayerY, this.widthPlayer, this.heightPlayer)
+        //this.ctx.fillStyle = 'green'
+        //this.ctx.fillRect(this.posPlayerX, this.posPlayerY, this.widthPlayer, this.heightPlayer)
 
+        this.ctx.drawImage(//this.image, 33, 71, 104, 124, 21, 20, 87, 104,
+            this.image,
+            this.posPlayerX,
+            this.posPlayerY,
+            this.widthPlayer,
+            this.heightPlayer
+        )
 
+        // this.animate(framesCounter)
         this.setGravity()
 
 
     }
+    // animate(framesCounter) {
+    //     if (framesCounter % 5 == 0) {
+    //         this.image.framesIndex++;
+    //     }
+    //     if (this.image.framesIndex >= this.image.frames) {
+    //         this.image.framesIndex = 0;
+    //     }
+    // }
 
 
     setEventHandlers() {

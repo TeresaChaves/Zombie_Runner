@@ -9,8 +9,6 @@ class Obstacle {
         this.posObstacleX = this.canvasSize.w - 50
         this.posObstacleY = this.canvasSize.h - this.heigthObstacle - 70
 
-
-
         this.velObstacle = {
             x: 6,
             y: 4
@@ -18,13 +16,7 @@ class Obstacle {
         }
 
         this.image = new Image();
-        this.image.src = "../img/bomba.png";
-
-
-
-
-
-
+        this.image.src = "./img/bomba.png";
     }
 
     drawObstacle() {
@@ -35,8 +27,6 @@ class Obstacle {
 
 
         this.moveObstacle()
-
-
     }
     moveObstacle() {
 

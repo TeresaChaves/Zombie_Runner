@@ -16,7 +16,7 @@ class Humans {
         }
 
         this.image = new Image();
-        this.image.src = "../img/human.png";
+        this.image.src = "./img/human.png";
 
     }
     drawHuman() {

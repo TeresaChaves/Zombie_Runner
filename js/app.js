@@ -13,34 +13,25 @@ const App = {
     player: [],
     obstacles: [],
     humans: [],
-    life: 3,
-    score: 0,
-    convertedHuman: [],
+    life: 0,
     background: undefined,
     FPS: 60,
     framesCounter: 0,
     init() {
+        // console.log(document.querySelector(".backgroundStart"))
+        document.querySelector(".backgroundStart").style.display = "none"
         this.setDimensions()
         this.setContext()
         this.createPlayer()
-        //this.createLife()
         this.createBackground()
-
         this.generateObstacles()
         this.clearObstacles()
         this.generateHumans()
 
-
         this.player.setEventHandlers()
         this.player.jump()
 
-
-
-
         this.start()
-
-        //console.log("hola")
-
     },
 
     setDimensions() {
@@ -49,7 +40,6 @@ const App = {
             h: window.innerHeight
 
         }
-        //console.log(this.canvasSize)
         document.querySelector('#myCanvas').setAttribute('height', this.canvasSize.h)
         document.querySelector('#myCanvas').setAttribute('width', this.canvasSize.w)
     },
@@ -59,14 +49,11 @@ const App = {
     },
 
     start() {
-        // console.log(this.canvasSize)
 
         this.interval = setInterval(() => {
-
-
-
+            this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.framesCounter++
-            if ((this.framesCounter) % (Math.floor(Math.random() * 70) + 50) === 0) {
+            if (this.framesCounter % (Math.floor(Math.random() * 70) + 150) === 0) {
                 this.generateObstacles()
 
             }
@@ -77,8 +64,7 @@ const App = {
             this.drawAll()
             this.isCollisionObstacle()
             this.isCollisionHuman()
-
-
+            this.youWin()
 
         }, 1000 / this.FPS)
 
@@ -87,71 +73,49 @@ const App = {
 
     createPlayer() {
         this.player = new Players(this.ctx, this.canvasSize)
-
     },
 
     createBackground() {
         this.background = new Background(this.ctx, this.canvasSize)
     },
 
-    // createLife() {
-    //     this.drawsLife = new DrawLife(this.ctx, this.canvasSize)
-    // },
 
     generateObstacles() {
         this.obstacles.push(new Obstacle(this.ctx, this.canvasSize))
-        //console.log(this.canvasSize)
-
-
     },
 
     generateHumans() {
         this.humans.push(new Humans(this.ctx, this.canvasSize))
     },
 
-
-
-
     scoreGen() {
-        this.ctx.fillText('Score', 10, 50)
-        this.ctx.strokeText('Score', 10, 50)
-        this.ctx.font = '32px arial'
-        this.ctx.fillText("Lifes", 120, 50)
-        this.ctx.strokeText(`Lifes ${this.life}`, 120, 50)
-        this.ctx.font = '32px arial'
+        this.ctx.fillText(` ${this.life}`, 120, 50)
+        this.ctx.strokeText(` ${this.life}`, 120, 50)
+        this.ctx.font = '32px Helvetica'
+        this.image = new Image();
+        this.image.src = "img/heart.png";
+        this.ctx.drawImage(this.image, 120, 20, 50, 50)
     },
-
-
-
-
-
     drawAll() {
 
         this.background.draw()
         this.scoreGen()
-        this.player.drawPlayer()
-        this.convertedHuman.forEach(life => life.drawDrawLife())
-
-        this.obstacles.forEach((obstacle => obstacle.drawObstacle())),
-            this.obstacles.forEach((obstacle => obstacle.moveObstacle()))
-        this.humans.forEach((humans => humans.drawHuman())),
-            this.humans.forEach((humans => humans.moveHuman()))
 
 
+        for (let i = 0; i < this.life; i++) {
+            this.player.drawPlayer(this.framesCounter, i)
+        }
+        this.obstacles.forEach((obstacle => obstacle.drawObstacle()))
+        this.obstacles.forEach((obstacle => obstacle.moveObstacle()))
+        this.humans.forEach((humans => humans.drawHuman()))
+        this.humans.forEach((humans => humans.moveHuman()))
     },
 
-
-
     clear() {
-
         this.ctx.clearRect(0, 0, this.canvasSize.w, this.canvasSize.h)
         this.clearHumans()
         this.clearObstacles()
-
     },
-
-
-
 
     clearObstacles() {
         this.obstacles = this.obstacles.filter(obs => obs.posObstacleX >= -100)
@@ -163,7 +127,7 @@ const App = {
     isCollisionObstacle() {
         return this.obstacles.forEach((obs, index) => {
             if (
-                this.player.posPlayerX + this.player.widthPlayer >= obs.posObstacleX &&
+                this.player.posPlayerX + this.player.widthPlayer >= obs.posObstacleX + 60 &&
                 this.player.posPlayerY + this.player.heightPlayer >= obs.posObstacleY &&
                 this.player.posPlayerX <= obs.posObstacleX + obs.widthObstacle
             ) {
@@ -175,13 +139,10 @@ const App = {
                 if (this.life === 0) {
                     this.gameOver()
                 }
-
             }
-
-
         })
-
     },
+
 
     isCollisionHuman() {
 
@@ -191,7 +152,7 @@ const App = {
 
             if (
 
-                this.player.posPlayerX + this.player.widthPlayer >= hum.posHumanX &&
+                this.player.posPlayerX + this.player.widthPlayer >= hum.posHumanX + 100 &&
                 this.player.posPlayerY + this.player.heightPlayer >= hum.posHumanY &&
                 this.player.posPlayerX <= hum.posHumanX + hum.widthHuman
 
@@ -199,29 +160,7 @@ const App = {
                 this.humans.splice(hum[i], 1)
                 this.life++
 
-
-                this.convertedHuman.push(new DrawLife(this.ctx, this.canvasSize, this.posDrawLifeX, this.posDrawLifeY))
-                //console.log(this.drawsLife)
-                // if (this.convertedHuman.length === 1) {
-                //     this.posDrawLifeX += 80
-
-                // }
-                // if (this.convertedHuman.length === 2) {
-                //     this.posDrawLifeX += 190
-
-
-
-                console.log(this.life)
             }
-            else if (this.life === 10) {
-                console.log("you win")
-                // console.log(this.humans = 10, 'you win')
-
-            }
-
-
-
-
 
         })
 
@@ -232,13 +171,29 @@ const App = {
         this.clear()
         clearInterval(this.interval)
         // console.log("this.gameOver()")
-        document.querySelector('#').style.display = "block"
+        document.querySelector('#gameOver').style.display = "block"
 
 
     },
+    youWin() {
+        if (this.life === 10) {
+
+            this.clear()
+            clearInterval(this.interval)
+            document.querySelector('#youwin').style.display = "block"
+
+            // this.ctx.fillStyle = "white"
+            // this.ctx.fillRect(0, 0, this.canvasSize.w, this.canvasSize.h)+
+
+
+
+            // this.ctx.fillText('YOU WIN', this.canvasSize.w / 2, this.canvasSize.h / 2),
+
+            //     this.ctx.strokeText('YOU WIN', this.canvasSize.w / 2, this.canvasSize.h / 2),
+            //     this.ctx.font = '150px Helvetica'
+        }
+    }
 }
-// startGame() {
-//     let startDiv = document.getElementById("start")
-//     startDiv.style.display = "none"
-//     start()
-// }
+
+
+

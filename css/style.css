@@ -1,13 +1,18 @@
 body {
+    overflow: hidden;
     margin: 0;
     padding: 0;
 }
 
 button {
     position: absolute;
-    top: 50%;
+    font-size: 60px;
+    padding: 20px 40px;
+    top: 20%;
     left: 50%;
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, -50%);
+    background-color: black;
+    color: green;
 }
 
 #gameOver {
@@ -33,9 +38,9 @@ button {
     
 } */
 .backgroundStart {
+    position: fixed;
     height: 100vh;
     width: 100vw;
     background-size: cover;
     background-image: url(../img/betis.jpg);
-
 }

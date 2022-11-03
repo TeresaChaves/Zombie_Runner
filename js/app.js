@@ -13,23 +13,29 @@ const App = {
     player: [],
     obstacles: [],
     humans: [],
-    life: 0,
+    life: 1,
     background: undefined,
     FPS: 60,
     framesCounter: 0,
+    musicGame: new Audio('./img/gamemusic.wav'),
+    musicWin: new Audio('./sounds/WINBETIS'),
+    musicGameOver: new Audio('./sounds/gameover'),
+
+
+
     init() {
         // console.log(document.querySelector(".backgroundStart"))
         document.querySelector(".backgroundStart").style.display = "none"
         this.setDimensions()
         this.setContext()
+        this.musicGame.play()
+        //this.musicWin.play()
         this.createPlayer()
         this.createBackground()
         this.generateObstacles()
         this.clearObstacles()
         this.generateHumans()
-
         this.player.setEventHandlers()
-        this.player.jump()
 
         this.start()
     },
@@ -49,7 +55,6 @@ const App = {
     },
 
     start() {
-
         this.interval = setInterval(() => {
             this.framesCounter > 5000 ? this.framesCounter = 0 : this.framesCounter++
             this.framesCounter++
@@ -94,7 +99,7 @@ const App = {
         this.ctx.font = '32px Helvetica'
         this.image = new Image();
         this.image.src = "img/heart.png";
-        this.ctx.drawImage(this.image, 120, 20, 50, 50)
+        this.ctx.drawImage(this.image, 80, 20, 50, 50)
     },
     drawAll() {
 
@@ -172,15 +177,19 @@ const App = {
         clearInterval(this.interval)
         // console.log("this.gameOver()")
         document.querySelector('#gameOver').style.display = "block"
+        this.musicGameOver.play()
+
 
 
     },
     youWin() {
         if (this.life === 10) {
 
+
             this.clear()
             clearInterval(this.interval)
             document.querySelector('#youwin').style.display = "block"
+
 
             // this.ctx.fillStyle = "white"
             // this.ctx.fillRect(0, 0, this.canvasSize.w, this.canvasSize.h)+

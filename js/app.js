@@ -2,7 +2,7 @@ const App = {
     appName: 'Zombie Runer',
     version: '1.0.0',
     license: undefined,
-    author: 'Teresa Chaves & Juan cardenas',
+    author: 'Teresa Chaves & Juan ardenas',
     description: 'Project of IronHacks video Game ',
     ctx: undefined,
     imgInstance: undefined,

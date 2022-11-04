@@ -19,8 +19,6 @@ class Players {
         }
         this.gravity = 0.3
 
-
-
     }
 
     drawPlayer(framesCounter, count) {
@@ -37,9 +35,11 @@ class Players {
             this.widthPlayer,
             this.heightPlayer
         )
-
-        this.animate(framesCounter)
         this.setGravity()
+        this.animate(framesCounter)
+
+
+        console.warn('-----', this.velPlayer.y)
     }
 
     animate(framesCounter) {
@@ -75,6 +75,8 @@ class Players {
                     event.preventDefault()
                     if (this.posPlayerY + this.heightPlayer >= this.posFloor) {
                         this.jump()
+
+
 
 
                     }
